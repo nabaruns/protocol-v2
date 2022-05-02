@@ -109,11 +109,18 @@ Functions and associated steps:
 ## LendingPoolConfigurator
 [LendingPoolConfigurator](./protocol/lendingpool/LendingPoolConfigurator.sol): implements the configuration methods for the Aave protocol
 
-- [configureReserveAsCollateral](./protocol/lendingpool/LendingPool.sol#L287): Configures the reserve collateralization parameters all the values are expressed in percentages with two decimals of precision. A valid value is 10000, which means 100.00%
+- [configureReserveAsCollateral](./protocol/lendingpool/LendingPoolConfigurator.sol#L287): Configures the reserve collateralization parameters all the values are expressed in percentages with two decimals of precision. A valid value is 10000, which means 100.00%
   - `asset` The address of the underlying asset of the reserve
   - `ltv` The loan to value of the asset when used as collateral
   - `liquidationThreshold` The threshold at which loans using this asset as collateral will be considered undercollateralized
   - `liquidationBonus` The bonus liquidators receive to liquidate this asset. The values is always above 100%. A value of 105% means the liquidator will receive a 5% bonus
+
+## GenericLogic
+[GenericLogic](./protocol/libraries/logic/GenericLogic.sol): Implements protocol-level logic to calculate and validate the state of a user
+
+- [balanceDecreaseAllowed](./protocol/libraries/logic/GenericLogic.soll#L55): Checks if a specific balance decrease is allowed (i.e. doesn't bring the user borrow position health factor under HEALTH_FACTOR_LIQUIDATION_THRESHOLD)
+
+- [calculateUserAccountData](./protocol/libraries/logic/GenericLogic.soll#L150): Calculates the user data across the reserves. This includes the total liquidity/collateral/borrow balances in ETH, the average Loan To Value, the average Liquidation Ratio, and the Health factor.
 
 ## AToken
 [ATokens](./protocol/tokenization/AToken.sol) are yield-generating tokens that are minted and burned upon deposit and withdraw. The aTokens' value is pegged to the value of the corresponding deposited asset at a 1:1 ratio, and can be safely stored, transferred or traded. All interest collected by the aTokens reserves are distributed to aTokens holders directly by continuously increasing their wallet balance. 
