@@ -106,6 +106,13 @@ Functions and associated steps:
     4. if releaseUnderlying is true, then transferUnderlyingTo
     5. emit Borrow
 
+## Lending Pool Collateral Manager
+[LendingPoolCollateralManager](./protocol/lendingpool/LendingPoolCollateralManager.sol): Implements actions involving management of collateral in the protocol, the main one being the liquidations.
+
+- [liquidationCall](./protocol/lendingpool/LendingPoolCollateralManager.sol#L81): Function to liquidate a position if its Health Factor drops below 1. The caller (liquidator) covers `debtToCover` amount of debt of the user getting liquidated, and receives a proportionally amount of the `collateralAsset` plus a bonus to cover market risk
+
+- [_calculateAvailableCollateralToLiquidate](./protocol/lendingpool/LendingPoolCollateralManager.sol#L272): Calculates how much of a specific collateral can be liquidated, given a certain amount of debt asset.
+
 ## LendingPoolConfigurator
 [LendingPoolConfigurator](./protocol/lendingpool/LendingPoolConfigurator.sol): implements the configuration methods for the Aave protocol
 
