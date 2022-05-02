@@ -110,10 +110,10 @@ Functions and associated steps:
 [LendingPoolConfigurator](./protocol/lendingpool/LendingPoolConfigurator.sol): implements the configuration methods for the Aave protocol
 
 - [configureReserveAsCollateral](./protocol/lendingpool/LendingPool.sol#L287): Configures the reserve collateralization parameters all the values are expressed in percentages with two decimals of precision. A valid value is 10000, which means 100.00%
-    1. Get the reserve data using the `asset`'s address
-    2. validate SetUseReserveAsCollateral
-    3. Set user config to use reserve as collateral
-    4. emit ReserveUsedAsCollateralEnabled if `useAsCollateral`=1, else emit ReserveUsedAsCollateralDisabled
+  - `asset` The address of the underlying asset of the reserve
+  - `ltv` The loan to value of the asset when used as collateral
+  - `liquidationThreshold` The threshold at which loans using this asset as collateral will be considered undercollateralized
+  - `liquidationBonus` The bonus liquidators receive to liquidate this asset. The values is always above 100%. A value of 105% means the liquidator will receive a 5% bonus
 
 ## AToken
 [ATokens](./protocol/tokenization/AToken.sol) are yield-generating tokens that are minted and burned upon deposit and withdraw. The aTokens' value is pegged to the value of the corresponding deposited asset at a 1:1 ratio, and can be safely stored, transferred or traded. All interest collected by the aTokens reserves are distributed to aTokens holders directly by continuously increasing their wallet balance. 
